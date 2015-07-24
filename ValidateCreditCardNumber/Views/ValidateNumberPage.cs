@@ -45,6 +45,13 @@ namespace ValidateCreditCardNumber
 			}; 
 		}
 
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
+
+			entryNumber.Focus ();
+		}
+
 		void OnNumberEntryCompleted(object sender, EventArgs args)
 		{
 			var entry = (EntryCustomFont)sender;
@@ -68,7 +75,6 @@ namespace ValidateCreditCardNumber
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 				Keyboard = Keyboard.Numeric
 			};
-			entryNumber.Focus ();
 			entryNumber.Completed += OnNumberEntryCompleted;
 
 			stackLayout.Children.Add (
@@ -80,6 +86,8 @@ namespace ValidateCreditCardNumber
 					Spacing = 0
 				}
 			);
+
+			entryNumber.Focus ();
 		}
 
 		public static bool Mod10Check(string creditCardNumber)
