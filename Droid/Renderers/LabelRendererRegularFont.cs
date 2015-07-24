@@ -11,7 +11,7 @@ namespace ValidateCreditCardNumber.Droid
 {
 	public class LabelRendererRegularFont : LabelRenderer
 	{
-		private Typeface typeFaceRegular = Typeface.CreateFromAsset (Forms.Context.Assets, "fonts/atarcc.ttf");
+		private Typeface typeFaceRegular = Typeface.CreateFromAsset (Forms.Context.Assets, "fonts/OCRA.ttf");
 
 		protected override void OnElementChanged (ElementChangedEventArgs<Label> e)
 		{

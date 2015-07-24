@@ -14,7 +14,6 @@ namespace ValidateCreditCardNumber
 		public ValidateNumberPage ()
 		{
 			cursorLabel = new LabelCustomFont {
-				HorizontalOptions = LayoutOptions.Start,
 				Text = ">"
 			};
 			entryNumber = new EntryCustomFont {
@@ -50,24 +49,26 @@ namespace ValidateCreditCardNumber
 		{
 			var entry = (EntryCustomFont)sender;
 			var resultText = "";
+			var resultLabel = new LabelCustomFont {
+				Text = resultText
+			};
 
-			if (Mod10Check (entry.Text))
-				resultText = ">VALID NUMBER";
-			else
+			if (Mod10Check (entry.Text)) {
+				resultLabel.TextColor = Color.FromHex("#fff");
+				resultText = ">__VALID NUMBER";
+			} else
 				resultText = ">INVALID NUMBER";
 
 			entry.IsEnabled = false;
+			resultLabel.Text = resultText;
 
-			stackLayout.Children.Add (
-				new LabelCustomFont {
-					Text = resultText
-				}
-			);
+			stackLayout.Children.Add (resultLabel);
 
 			entryNumber = new EntryCustomFont {
+				HorizontalOptions = LayoutOptions.FillAndExpand,
 				Keyboard = Keyboard.Numeric
 			};
-			entryNumber.IsEnabled = true;
+			entryNumber.Focus ();
 			entryNumber.Completed += OnNumberEntryCompleted;
 
 			stackLayout.Children.Add (
