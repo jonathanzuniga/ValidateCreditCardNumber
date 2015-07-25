@@ -56,22 +56,19 @@ namespace ValidateCreditCardNumber
 		{
 			var entry = (EntryCustomFont)sender;
 			var resultText = "";
-			var resultLabel = new LabelCustomFont {
+			var resultLabel = new DecodeLabel {
 				Text = resultText
 			};
-//			var decodeLabel = new DecodeLabel ();
 
 			if (Mod10Check (entry.Text)) {
 				resultLabel.TextColor = Color.FromHex ("#fff");
 				resultText = ">__VALID NUMBER";
 			} else {
 				resultText = ">INVALID NUMBER";
-
-//				decodeLabel.Animate (true, "Cyber code is the best.", 10);
 			}
 
 			entry.IsEnabled = false;
-			resultLabel.Text = resultText;
+			resultLabel.Animate (true, resultText, 10);
 
 			stackLayout.Children.Add (resultLabel);
 
@@ -81,7 +78,6 @@ namespace ValidateCreditCardNumber
 			};
 			entryNumber.Completed += OnNumberEntryCompleted;
 
-//			stackLayout.Children.Add (decodeLabel);
 			stackLayout.Children.Add (
 				new StackLayout {
 					Children = {

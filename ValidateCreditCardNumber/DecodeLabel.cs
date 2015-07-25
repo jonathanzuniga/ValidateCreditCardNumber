@@ -8,7 +8,7 @@ using AdvancedTimer.Forms.Plugin.Abstractions;
 
 namespace ValidateCreditCardNumber
 {
-	public class DecodeLabel : Label
+	public class DecodeLabel : LabelCustomFont
 	{
 //		private readonly Timer _timerAnimate = new Timer();
 		static IAdvancedTimer _timerAnimate = DependencyService.Get<IAdvancedTimer>();
@@ -29,29 +29,12 @@ namespace ValidateCreditCardNumber
 //			_timerAnimate.Interval = 100;
 //			_timerAnimate.setInterval(100);
 //			_timerAnimate.Tick += _timerAnimate_Tick;
-			_timerAnimate.initTimer(100, timerElapsed, true);
-			_timerAnimate.startTimer();
-			_timerAnimate.setInterval(100);
-
-			while (canTryAgain) {
-				if (_initGenCount != 0) {
-					Text = _decodeEffect.GenerateNumberRange (Text.Length);
-					_initGenCount--;
-					return;
-				}
-
-				var decodeMode = _showing ? DecodeMode.Show : DecodeMode.Hide;
-				var text = _decodeEffect.Peek (decodeMode);
-
-				if (text == null) {
-					_timerAnimate.stopTimer ();
-				} else {
-					Text = text;
-				}
-			}
+//			_timerAnimate.initTimer(100, timerElapsed, true);
+//			_timerAnimate.startTimer();
+//			_timerAnimate.setInterval(100);
+//			_timerAnimate.Tick += _timerAnimate_Tick; // How?
 		}
 
-		static bool canTryAgain = true;
 		public void Animate(bool show, string text, int initGenCount)
 		{
 			_initGenCount = initGenCount;
@@ -72,24 +55,24 @@ namespace ValidateCreditCardNumber
 			});
 		}
 
-//		private void _timerAnimate_Tick(object sender, EventArgs e)
-//		{
-//			if (_initGenCount != 0) {
-//				Text = _decodeEffect.GenerateNumberRange (Text.Length);
-//				_initGenCount--;
-//				return;
-//			}
-//
-//			var decodeMode = _showing ? DecodeMode.Show : DecodeMode.Hide;
-//			var text = _decodeEffect.Peek (decodeMode);
-//
-//			if (text == null) {
-////				_timerAnimate.Stop ();
-//				_timerAnimate.stopTimer ();
-//			} else {
-//				Text = text;
-//			}
-//		}
+		private void _timerAnimate_Tick(object sender, EventArgs e)
+		{
+			if (_initGenCount != 0) {
+				Text = _decodeEffect.GenerateNumberRange (Text.Length);
+				_initGenCount--;
+				return;
+			}
+
+			var decodeMode = _showing ? DecodeMode.Show : DecodeMode.Hide;
+			var text = _decodeEffect.Peek (decodeMode);
+
+			if (text == null) {
+//				_timerAnimate.Stop ();
+				_timerAnimate.stopTimer ();
+			} else {
+				Text = text;
+			}
+		}
 	}
 
 	public enum DecodeMode
