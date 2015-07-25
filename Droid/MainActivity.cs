@@ -19,6 +19,8 @@ namespace ValidateCreditCardNumber.Droid
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
+			AdvancedTimer.Forms.Plugin.Droid.AdvancedTimerImplementation.Init();
+
 			LoadApplication (new App ());
 		}
 	}
